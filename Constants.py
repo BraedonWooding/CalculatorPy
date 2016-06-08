@@ -1,7 +1,7 @@
 import re
-'''
-Just all the regex constants below for easy changing and code maintenance
-'''
+
+#Just all the regex constants below for easy changing and code maintenance
+
 symbols = r'\*|\/|\(|\)|\-|\+|\^|\%|\π|\√\(*.\)|!'
 
 wordedSymbols = r'Pi|euler|sqrt|cubt|rt|floor|ceil|round|sin|cos|tan|-sin|-cos|-tan|bin|base|log|per|rand|randInt|int|bin|hex|oct|base|mod|ans|M|pB|E|eB|P<'
@@ -118,7 +118,6 @@ ENDIF
 """
 #Returns true if the expression has symbols
 def hasSymbols (expression) -> bool:
-    global symbols,wordedSymbols
     if re.search(symbols + r'|' + wordedSymbols, expression):
         return True
     else:

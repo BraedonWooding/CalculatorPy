@@ -16,7 +16,7 @@ def powerNS (inputString) -> float:
         try:
             fl = pow(float(splitS[0]), float(splitS[1]))
             logL(log="     Working out: " + "^".join([inputString.group(1), inputString.group(5)]) + " = " + str(fl), time=time.clock()-time1)
-            if mod(fl, 1) == 0:
+            if fl % 1 == 0:
                 return int(fl)
             else:
                 return fl
@@ -40,7 +40,7 @@ def divideS (inputString) -> float:
         try:
             fl = float(splitS[0]) / float(splitS[1])
             logL(log="     Working out: " + "/".join([inputString.group(1), inputString.group(5)]) + " = " + str(fl), time=time.clock()-time1)
-            if mod(fl, 1) == 0:
+            if fl % 1 == 0:
                 return int(fl)
             else:
                 return fl
@@ -64,7 +64,7 @@ def addS(inputString) -> float:
         try:
             fl = float(splitS[0]) + float(splitS[1])
             logL(log="     Working out: " + "+".join([inputString.group(1), inputString.group(5)]) + " = " + str(fl), time=time.clock()-time1)
-            if mod(fl, 1) == 0:
+            if fl % 1 == 0:
                 return int(fl)
             else:
                 return fl
@@ -80,7 +80,7 @@ def subS(inputString) -> float:
     try:
         fl = float(inputString.group(1)) - float(inputString.group(5))
         logL(log="     Working out: " + "-".join([inputString.group(1), inputString.group(5)]) + " = " + str(fl), time=time.clock()-time1)
-        if mod(fl, 1) == 0:
+        if fl % 1 == 0:
             return int(fl)
         else:
             return fl
@@ -121,7 +121,7 @@ def timesS (inputString) -> float:
         try:
             fl = float(splitS[0]) * float(splitS[1])
             logL(log="     Working out: " + "*".join([inputString.group(1), inputString.group(5)]) + " = " + str(fl), time=time.clock()-time1)
-            if mod(fl, 1) == 0:
+            if fl % 1 == 0:
                 return int(fl)
             else:
                 return fl
@@ -145,7 +145,7 @@ def modS (inputString) -> float:
         try:
             fl = float(splitS[0]) % float(splitS[1])
             logL(log="     Working out: " + "%".join([inputString.group(1), inputString.group(5)]) + " = " + str(fl), time=time.clock()-time1)
-            if mod(fl, 1) == 0:
+            if fl % 1 == 0:
                 return int(fl)
             else:
                 return fl
@@ -166,7 +166,7 @@ def perS (inputString) -> float:
     try:
         fl = float(stringRep) / 100
         logL(log="     Working out: " + inputString.group(1) + "% = " + str(fl), time=time.clock()-time1)
-        if mod(fl, 1) == 0:
+        if fl % 1 == 0:
             return int(fl)
         else:
             return fl
@@ -184,12 +184,12 @@ def facS (inputString) -> float:
     try:
         fl = float(factorial(float(stringRep)))
         logL(log="     Working out: " + inputString.group(1) + "! = " + str(fl), time=time.clock()-time1)
-        if mod(fl, 1) == 0:
+        if fl % 1 == 0:
             return int(fl)
         else:
             return fl
     except(TypeError, ArithmeticError, AssertionError, NameError, ValueError):
-        if mod(float(inputString.group(1)), 1) != 0:
+        if float(inputString.group(1)) % 1 != 0:
             logError("Tried to factorial a decimal number")
         else:
             logError("Factorial Error")
@@ -215,7 +215,7 @@ def roundS (inputString) -> float:
     try:
         fl = round(float(search.group(1)), int(search.group(2)))
         logL(log="     Working out: rounding " + search.group(1) + " to "  + search.group(2) + " d.p. = " + str(fl), time=time.clock()-time1)
-        if mod(fl, 1) == 0:
+        if fl % 1 == 0:
             return int(fl)
         else:
             return fl
@@ -235,7 +235,7 @@ def floorS (inputString) -> float:
     try:
         fl = floor(float(stringRep))
         logL(log="     Working out: floor(" + stringRep + ") = " + str(fl), time=time.clock()-time1)
-        if mod(fl, 1) == 0:
+        if fl % 1 == 0:
             return int(fl)
         else:
             return fl
@@ -255,7 +255,7 @@ def ceilS (inputString) -> float:
     try:
         fl = ceil(float(stringRep))
         logL(log="     Working out: ceil(" + stringRep + ") = " + str(fl), time=time.clock()-time1)
-        if mod(fl, 1) == 0:
+        if fl % 1 == 0:
             return int(fl)
         else:
             return fl
@@ -274,7 +274,7 @@ def singleRootS (inputString) -> float:
         power = 1.0/float(search.group(3))
         fl = pow(float(search.group(1)), power)
         logL(log="     Working out: rooting " + search.group(1) + " by " + search.group(3) + " = " + str(fl), time=time.clock()-time1)
-        if mod(fl, 1) == 0:
+        if fl % 1 == 0:
             return int(fl)
         else:
             return fl
@@ -308,7 +308,7 @@ def sqrtS (inputString) -> float:
                 logL(log="     Working out: sqrt(" + stringRep + ") = " + str(fl), time=time.clock()-time1)
             else:
                 logL(log="     Working out: √(" + stringRep + ") = " + str(fl), time=time.clock()-time1)
-            if mod(fl, 1) == 0:
+            if fl % 1 == 0:
                 return int(fl)
             else:
                 return fl
@@ -331,7 +331,7 @@ def cubtS (inputString) -> float:
     try:
         fl = pow(float(stringRep), 1/3)
         logL(log="     Working out: cubt(" + stringRep + ") = " + str(fl), time=time.clock()-time1)
-        if mod(fl, 1) == 0:
+        if fl % 1 == 0:
             return int(fl)
         else:
             return fl
@@ -364,7 +364,7 @@ def randomIntFuncS(inputString) -> float:
         fl = random.randint(int(randomFunctions.group(2)), int(randomFunctions.group(3)))
         logL(log="     Working out: random between " + randomFunctions.group(2) + " and " + randomFunctions.group(
             3) + " is " + str(fl), time=time.clock()-time1)
-        if mod(fl, 1) == 0:
+        if fl % 1 == 0:
             return int(fl)
         else:
             return fl
@@ -379,7 +379,7 @@ def randomFuncS(inputString) -> float:
     try:
         fl = random.uniform(float(randomFunctions.group(2)), float(randomFunctions.group(3)))
         logL(log="     Working out: random between " + randomFunctions.group(2) + " and " + randomFunctions.group(3) + " is " + str(fl), time=time.clock()-time1)
-        if mod(fl, 1) == 0:
+        if fl % 1 == 0:
             return int(fl)
         else:
             return fl
@@ -398,7 +398,7 @@ def rtNS (inputString) -> float:
         try:
             fl = pow(float(numberSearch.group(2)), power)
             logL(log="     Working out: " + numberSearch.group(1) + "th root" + "(" + numberSearch.group(2) + ") = " + str(fl), time=time.clock()-time1)
-            if mod(fl, 1) == 0:
+            if fl % 1 == 0:
                 return int(fl)
             else:
                 return fl
@@ -628,14 +628,10 @@ def modFuncS(inputString) -> float:
     try:
         fl = float(modFunctions.group(2))%float(modFunctions.group(3))
         logL(log="     Working out: modulo (remainder) of " + modFunctions.group(2) + " and " + modFunctions.group(3) + " is " + str(fl), time=time.clock()-time1)
-        if mod(fl, 1) == 0:
+        if fl % 1 == 0:
             return int(fl)
         else:
             return fl
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("Modulo Error")
         return nan
-
-#To make life easier since I liked the function more than the symbol
-def mod(x, y) -> float:
-    return x%y

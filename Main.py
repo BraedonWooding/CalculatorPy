@@ -9,13 +9,12 @@ import Logger
 import ValueRememberer
 import time
 
-"""
-Function that takes in a stringed expression and returns the final string value of that expression
-Line is just a simple value that states what line the thing is at
-Extra before text is just what is before the statement (so it looks nice)
-And after is the same (just cosmetic)
-print text is just a bool for printing text or not
-"""
+# Function that takes in a stringed expression and returns the final string value of that expression
+# Line is just a simple value that states what line the thing is at
+# Extra before text is just what is before the statement (so it looks nice)
+# And after is the same (just cosmetic)
+# print text is just a bool for printing text or not
+
 def repeatExpressionTillDone (expression, startLine = -1, extraBeforeText="", extraAfterText="", printText=True) -> str:
     inputtedExpression = expression
     #print(expression)
@@ -445,8 +444,7 @@ def processExpression(text):
                         for result in pointResultIter:
                             data.append([[(float(result.group(2)), float(result.group(4))), (float(result.group(6)), float(result.group(8)))]])
                             legends.append("".join(result.group(1)))
-                except (ValueError, NameError, TypeError) as er:
-                    print(er)
+                except (ValueError, NameError, TypeError):
                     pass
 
         #For dynamic graph range
@@ -563,19 +561,16 @@ def processExpression(text):
         original = inputtedExpression
         previous = ""
         line = -1
-        checkBool = True
         #Log initial
         Logger.logL(log="\nExpression: " + inputtedExpression, line=-1, time=0)
         #MAIN LOOP
-        while checkBool is True:
+        while True:
             line += 1
             try:
                 float(inputtedExpression)
                 break
             except (ArithmeticError, TypeError, NameError, ValueError):
-                if hasSymbols(inputtedExpression):
-                    checkBool = True
-                else:
+                if not hasSymbols(inputtedExpression):
                     break
             #Recursion stopper (Can't be disable)
             if previous == inputtedExpression:

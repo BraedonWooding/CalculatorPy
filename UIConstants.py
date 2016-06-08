@@ -39,7 +39,7 @@ class ExpressionF:
             secondV = secondVs[i]
             expressional = expressionals[i]
 
-            if type(firstV) is str:
+            if isinstance(firstV, str):
                 if "x" in firstV or "X" in firstV:
                     self.firstVs.append(math.inf)
                 elif "y" in firstV or "Y" in firstV:
@@ -51,7 +51,7 @@ class ExpressionF:
             else:
                 self.firstVs.append(firstV)
 
-            if type(secondV) is str:
+            if isinstance(secondV, str):
                 if "x" in secondV or "X" in secondV:
                     self.secondVs.append(math.inf)
                 elif "y" in secondV or "Y" in secondV:
@@ -80,12 +80,12 @@ def performCalculation(testing, valueX, valueY) -> bool:
         try:
             #Asserts then if value is infinity/nan it will make it x or y respectively
             assert isinstance(expression, ExpressionF)
-            if type(firstV) is float:
+            if isinstance(firstV, float):
                 if math.isinf(firstV):
                     firstV = valueX
                 if math.isnan(firstV):
                     firstV = valueY
-            if type(secondV) is float:
+            if isinstance(secondV, str):
                 if math.isinf(secondV):
                     secondV = valueX
                 if math.isnan(secondV):

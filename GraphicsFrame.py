@@ -142,7 +142,7 @@ class GraphicsFrame(wx.Frame):
             for colour in start_colours:
                 index = colours.index(colour.upper())
                 self.colour.append(colours[index])
-        for i in range(len(data)):
+        for _ in range(len(data)):
             if index >= len(colours):
                 index = 0
             self.colour.append(colours[index])
@@ -157,7 +157,7 @@ class GraphicsFrame(wx.Frame):
     #Draws the graph
     def draw(self):
         # plot.
-        global latestGraphSelf, allGraphs
+        global latestGraphSelf
         self.canvas = plot.PlotCanvas(self, pos=(0,0), size=(940,720))
         self.canvas.EnableZoom = True
         self.canvas.SetBackgroundColour(self.bgColour)
@@ -249,7 +249,8 @@ class CalculatorMenu:
 
         panel.Bind(wx.EVT_MENU, self.openHelp, id=wx.ID_HELP)
 
-    def openHelp(self, event):
+    @classmethod
+    def openHelp(cls, event):
         subprocess.Popen("open Help", shell=True)
 
     #Toggles degrees and radians; is reversed since I called variable gRadians instead of gDegrees
@@ -269,10 +270,7 @@ class CalculatorMenu:
 
     #Toggles centre of graph
     def toggleCentre(self, event):
-        if self.edit_menu.IsChecked(wx.ID_FILE5):
-            UIConstants.gCentre = True
-        else:
-            UIConstants.gCentre = False
+        UIConstants.gCentre = self.edit_menu.IsChecked(wx.ID_FILE5)
 
         for graph in allGraphs:
             if UIConstants.gCentre:
@@ -319,14 +317,15 @@ class CalculatorMenu:
 
     # Toggles recursion
     def toggleFractions(self, event):
-        global _main, _latest
+        global _latest
         UIConstants.gFraction = self.edit_menu.IsChecked(wx.ID_FILE9)
         self.edit_menu.Check(wx.ID_FILE9, self.edit_menu.IsChecked(wx.ID_FILE9))
         if "y" not in _latest.lower() and "x" not in _latest.lower():
             _main(_latest)
 
     #An about information of main mode
-    def onAboutMain(self, event):
+    @classmethod
+    def onAboutMain(cls, event):
         aboutInfo = wx.adv.AboutDialogInfo()
         aboutInfo.SetName("Graphics Calculator")
         aboutInfo.SetVersion("1.01a")
@@ -336,7 +335,8 @@ class CalculatorMenu:
         wx.adv.AboutBox(aboutInfo)
 
     #An about information of calculator mode
-    def onAboutCalc(self, event):
+    @classmethod
+    def onAboutCalc(cls, event):
         dlg = wx.MessageDialog(None, "Calculator Mode\n"
                                      "This mode allows you to perform complex sets of equations, chaining multiple together.\n"
                                      "All commands and further explanation is in the documentation\n",
@@ -345,7 +345,8 @@ class CalculatorMenu:
         dlg.ShowModal()
 
     #An about information of graph mode
-    def onAboutGraph(self, event):
+    @classmethod
+    def onAboutGraph(cls, event):
         dlg = wx.MessageDialog(None, "Graph Mode\n"
                                      "This mode allows you to graph any set of x and y values as long as its in the format of x|y = [x|y].*.\n"
                                      "This is explained further in the documentation\n",
@@ -353,16 +354,18 @@ class CalculatorMenu:
         dlg.ShowModal()
 
     #Prints the graph
-    def printGraph(self, event):
+    @classmethod
+    def printGraph(cls, event):
         chosenGraph = chooseGraph()
         if chosenGraph < len(allGraphs):
             allGraphs[chosenGraph][0].canvas.PrintPreview()
 
     #Saves the graph
-    def saveGraph(self, event):
+    @classmethod
+    def saveGraph(cls, event):
         chosenGraph = chooseGraph()
         if chosenGraph < len(allGraphs):
-            if not self.saveGraphDialog(graphInt=chosenGraph, fileName=allGraphs[chosenGraph][1]):
+            if not cls.saveGraphDialog(graphInt=chosenGraph, fileName=allGraphs[chosenGraph][1]):
                 dlg = wx.MessageDialog(None, "Saving failed", 'File Saving Error',
                                         wx.OK | wx.ICON_ERROR)
                 try:
@@ -372,7 +375,8 @@ class CalculatorMenu:
 
     #This is just a copy and slight change so this isn't documentated by me at all.
     #There will be no data dictionary or pseudo code of this.
-    def saveGraphDialog(self, fileName = '', graphInt = 0):
+    @classmethod
+    def saveGraphDialog(cls, fileName = '', graphInt = 0):
         #The plotcanvas savefile is broken currently and since I can't end the code this is just a copy and paste with the fixes
         """
             Saves the file to the type specified in the extension. If no file
