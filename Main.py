@@ -1,5 +1,5 @@
 from Functions import *
-from math import *
+import math as m
 from Constants import *
 from fractions import Fraction
 from UIConstants import  *
@@ -40,10 +40,7 @@ def repeatExpressionTillDone (expression, startLine = -1, extraBeforeText="", ex
         try:
             float(inputtedExpression)
         except (ArithmeticError, TypeError, NameError, ValueError):
-            if hasSymbols(inputtedExpression):
-                checkBool = True
-            else:
-                checkBool = False
+            checkBool = hasSymbols(inputtedExpression)
         else:
             checkBool = False
 
@@ -54,21 +51,21 @@ def repeatExpressionTillDone (expression, startLine = -1, extraBeforeText="", ex
             fl = float(inputtedExpression)
             return fl
         except (ValueError, AssertionError, ArithmeticError, TypeError, NameError):
-            return nan
+            return m.nan
 
 #Runs once doing a single expressional value (and all placeholders)
 def runOnceExpression(expression, line = -1, extraBeforeText = "", extraAfterText = "") -> str:
     timeLine = time.clock()
     inputtedExpression = expression + " "
     #Replace pi or π
-    inputtedExpression = inputtedExpression.replace("Pi", str(pi))
-    inputtedExpression = inputtedExpression.replace("π", str(pi))
-    inputtedExpression = inputtedExpression.replace("pB", "(" + str(pi) + ")")
+    inputtedExpression = inputtedExpression.replace("Pi", str(m.pi))
+    inputtedExpression = inputtedExpression.replace("π", str(m.pi))
+    inputtedExpression = inputtedExpression.replace("pB", "(" + str(m.pi) + ")")
 
     #Replace euler (e)
-    inputtedExpression = inputtedExpression.replace("euler", str(e))
-    inputtedExpression = inputtedExpression.replace("E", str(e))
-    inputtedExpression = inputtedExpression.replace("eB", "(" + str(e) + ")")
+    inputtedExpression = inputtedExpression.replace("euler", str(m.e))
+    inputtedExpression = inputtedExpression.replace("E", str(m.e))
+    inputtedExpression = inputtedExpression.replace("eB", "(" + str(m.e) + ")")
 
     inputtedExpression = inputtedExpression.replace("M", str(ValueRememberer.getMemory()))
 
@@ -288,7 +285,7 @@ def runOnceExpression(expression, line = -1, extraBeforeText = "", extraAfterTex
         bracketStart = -1
         bracketEnd = -1
         #Goes through all the string (range of length of string)
-        for i in range(len(inputtedExpression)):
+        for i,_ in enumerate(inputtedExpression):
             #Double checker to see if i for some reason is too large
             if i < len(inputtedExpression):
                 #If its opening then set the starting point

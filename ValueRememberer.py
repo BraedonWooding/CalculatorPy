@@ -24,7 +24,6 @@ def getMemory() -> float:
 
 #Gets answer of n
 def getAnswerN(n) -> float:
-    global _answers
     tempIndex = len(_answers)-n
     if tempIndex >= 0:
         return _answers[tempIndex]

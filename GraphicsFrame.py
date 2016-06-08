@@ -107,7 +107,6 @@ def chooseGraph() -> int:
 #Setups the graphics frame (or the graph)
 class GraphicsFrame(wx.Frame):
     def __init__(self, parent, data, x, y, expression, start_colour='FIREBRICK', xaxis='X axis', yaxis='Y axis', width=1.5, start_colours=None, legends=None):
-        global latestGraphSelf, allGraphs, colours
         wx.Frame.__init__(self, parent, -1, "Graph " + str(len(allGraphs)), size=(940, 720))
         #Data is in format of [ [ [(24,1)], [(1,6)] ], [ [(2,9)] ] ]
         self.data = data
