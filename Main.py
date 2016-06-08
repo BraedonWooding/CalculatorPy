@@ -23,10 +23,7 @@ def repeatExpressionTillDone (expression, startLine = -1, extraBeforeText="", ex
     try:
         float(inputtedExpression)
     except (ArithmeticError, TypeError, NameError, ValueError):
-        if hasSymbols(inputtedExpression):
-            checkBool = True
-        else:
-            checkBool = False
+        checkBool = hasSymbols(inputtedExpression)
     else:
         checkBool = False
     #Main Loop
@@ -85,7 +82,7 @@ def runOnceExpression(expression, line = -1, extraBeforeText = "", extraAfterTex
 
     #Brackets with a * infront
     #this will make sure that if any number or brackets is before another one it will add a * sign
-    for i in range(len(inputtedExpression)):
+    for i,_ in enumerate(inputtedExpression):
         # Double checker to see if i for some reason is too large
         if i < len(inputtedExpression):
             # If its opening then set the starting point
@@ -301,12 +298,10 @@ def runOnceExpression(expression, line = -1, extraBeforeText = "", extraAfterTex
                 elif inputtedExpression[i] == ")":
                     bracketEnd = i
                     break
-        """
-                    MAIN BRACKET CODE
-                    This is simple:
-                    Sets new Expression to equal an 'runexpression' of everything in the bracket
-                    First it sets it to everything before the start of the brackets then add the expression of everything in the brackets (from the start to the end non-inclusive) then the ending of the brackets
-        """
+                    # MAIN BRACKET CODE
+                    # This is simple:
+                    # Sets new Expression to equal an 'runexpression' of everything in the bracket
+                    # First it sets it to everything before the start of the brackets then add the expression of everything in the brackets (from the start to the end non-inclusive) then the ending of the brackets
         if bracketEnd > -1 and bracketStart > -1:
             newExpression = repeatExpressionTillDone(inputtedExpression[bracketStart+1:bracketEnd], startLine= line, extraAfterText= inputtedExpression[bracketEnd:], extraBeforeText=inputtedExpression[:bracketStart+1])
             #To not Logger.log twice
@@ -457,11 +452,11 @@ def processExpression(text):
         repeatText = processTAndR("&".join(expressions))
         expressions = [x.lstrip(" ") for x in repeatText.split("&")]
         legends.extend(expressions)
-        for q in range(len(expressions)):
-            if "C<" in expressions[q]:
-                colourResult = re.search(colourSetterRegex, expressions[q])
+        for q,e in enumerate(expressions):
+            if "C<" in e:
+                colourResult = re.search(colourSetterRegex, e)
                 if colourResult is not None:
-                    expressions[q] = re.sub(colourSetterRegex, "", expressions[q])
+                    expressions[q] = re.sub(colourSetterRegex, "", e)
                     if colourResult.group(1).upper() in GraphicsFrame.colours:
                         coloursChosen.append(colourResult.group(1))
             #Local data points
@@ -554,10 +549,10 @@ def processExpression(text):
     #Else if not in graph mode then just do normal
     repeatText = processTAndR("&".join(expressions))
     expressions = repeatText.split("&")
-    for i in range(len(expressions)):
+    for _,e in enumerate(expressions):
         #Local variables
         time2 = time.clock()
-        inputtedExpression = expressions[i]
+        inputtedExpression = e
         original = inputtedExpression
         previous = ""
         line = -1

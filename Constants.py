@@ -118,7 +118,4 @@ ENDIF
 """
 #Returns true if the expression has symbols
 def hasSymbols (expression) -> bool:
-    if re.search(symbols + r'|' + wordedSymbols, expression):
-        return True
-    else:
-        return False
+    return re.search(symbols + r'|' + wordedSymbols, expression)

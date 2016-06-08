@@ -1,4 +1,4 @@
-from math import *
+import math as m
 import random
 from Logger import *
 import time
@@ -22,10 +22,10 @@ def powerNS (inputString) -> float:
                 return fl
         except(TypeError, ArithmeticError, AssertionError, NameError, ValueError):
             logError("Power Error")
-            return nan
+            return m.nan
     else:
         logError("Power Error")
-        return nan
+        return m.nan
 
 def divideS (inputString) -> float:
     time1 = time.clock()
@@ -46,10 +46,10 @@ def divideS (inputString) -> float:
                 return fl
         except(TypeError, ArithmeticError, AssertionError, NameError, ValueError):
             logError("Divide Error")
-            return nan
+            return m.nan
     else:
         logError("Divide Error")
-        return nan
+        return m.nan
 
 def addS(inputString) -> float:
     time1 = time.clock()
@@ -70,10 +70,10 @@ def addS(inputString) -> float:
                 return fl
         except(TypeError, ArithmeticError, AssertionError, NameError, ValueError):
             logError("Add Error")
-            return nan
+            return m.nan
     else:
         logError("Add Error")
-        return nan
+        return m.nan
 
 def subS(inputString) -> float:
     time1 = time.clock()
@@ -86,7 +86,7 @@ def subS(inputString) -> float:
             return fl
     except(TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("Sub Error")
-        return nan
+        return m.nan
 
 def addSubS(string) -> float:
     if "+" in string.group(0):
@@ -95,7 +95,7 @@ def addSubS(string) -> float:
         return subS(string)
     else:
         logError("Input Error")
-        return nan
+        return m.nan
 
 def divideTimesModS (string) -> float:
     if "*" in string.group(0):
@@ -106,7 +106,7 @@ def divideTimesModS (string) -> float:
         return modS(string)
     else:
         logError("Input Error")
-        return nan
+        return m.nan
 
 def timesS (inputString) -> float:
     time1 = time.clock()
@@ -127,10 +127,10 @@ def timesS (inputString) -> float:
                 return fl
         except(TypeError, ArithmeticError, AssertionError, NameError, ValueError):
             logError("Times Error")
-            return nan
+            return m.nan
     else:
         logError("Times Error")
-        return nan
+        return m.nan
 
 def modS (inputString) -> float:
     time1 = time.clock()
@@ -151,10 +151,10 @@ def modS (inputString) -> float:
                 return fl
         except(TypeError, ArithmeticError, AssertionError, NameError, ValueError):
             logError("Modulo Error")
-            return nan
+            return m.nan
     else:
         logError("Modulo Error")
-        return nan
+        return m.nan
 
 def perS (inputString) -> float:
     time1 = time.clock()
@@ -172,7 +172,7 @@ def perS (inputString) -> float:
             return fl
     except(TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("Percentage Error")
-        return nan
+        return m.nan
 
 def facS (inputString) -> float:
     time1 = time.clock()
@@ -182,7 +182,7 @@ def facS (inputString) -> float:
     stringRep = stringRep.replace(")", "", 1)
 
     try:
-        fl = float(factorial(float(stringRep)))
+        fl = float(m.factorial(float(stringRep)))
         logL(log="     Working out: " + inputString.group(1) + "! = " + str(fl), time=time.clock()-time1)
         if fl % 1 == 0:
             return int(fl)
@@ -193,7 +193,7 @@ def facS (inputString) -> float:
             logError("Tried to factorial a decimal number")
         else:
             logError("Factorial Error")
-        return nan
+        return m.nan
 
 def intFuncS (inputString) -> float:
     if "ceil" in inputString:
@@ -204,7 +204,7 @@ def intFuncS (inputString) -> float:
         return roundS(inputString)
     else:
         logError("Input Error")
-        return nan
+        return m.nan
 
 def roundS (inputString) -> float:
     time1 = time.clock()
@@ -221,7 +221,7 @@ def roundS (inputString) -> float:
             return fl
     except AssertionError:# (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("Rounding not in right format, format is: round(numberToRound, nDecimalPlaces)")
-        return nan
+        return m.nan
 
 def floorS (inputString) -> float:
     time1 = time.clock()
@@ -233,7 +233,7 @@ def floorS (inputString) -> float:
     stringRep = stringRep.replace("floor", "")
 
     try:
-        fl = floor(float(stringRep))
+        fl = m.floor(float(stringRep))
         logL(log="     Working out: floor(" + stringRep + ") = " + str(fl), time=time.clock()-time1)
         if fl % 1 == 0:
             return int(fl)
@@ -241,7 +241,7 @@ def floorS (inputString) -> float:
             return fl
     except(TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("Floor Error")
-        return nan
+        return m.nan
 
 def ceilS (inputString) -> float:
     time1 = time.clock()
@@ -253,14 +253,14 @@ def ceilS (inputString) -> float:
     stringRep = stringRep.replace("ceil", "")
 
     try:
-        fl = ceil(float(stringRep))
+        fl = m.ceil(float(stringRep))
         logL(log="     Working out: ceil(" + stringRep + ") = " + str(fl), time=time.clock()-time1)
         if fl % 1 == 0:
             return int(fl)
         else:
             return fl
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
-        return nan
+        return m.nan
 
 def singleRootS (inputString) -> float:
     inputString += " "
@@ -269,7 +269,7 @@ def singleRootS (inputString) -> float:
     if search is None:
         logError("Root not in right format: Format is root(numberToRoot, nthRoot)")
         print(inputString)
-        return nan
+        return m.nan
     try:
         power = 1.0/float(search.group(3))
         fl = pow(float(search.group(1)), power)
@@ -279,7 +279,7 @@ def singleRootS (inputString) -> float:
         else:
             return fl
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
-        return nan
+        return m.nan
 
 def rootFuncS (inputString) -> float:
     #Not going to be grouped
@@ -303,7 +303,7 @@ def sqrtS (inputString) -> float:
 
     try:
         if float(stringRep) >= 0:
-            fl = sqrt(float(stringRep))
+            fl = m.sqrt(float(stringRep))
             if sqrtB:
                 logL(log="     Working out: sqrt(" + stringRep + ") = " + str(fl), time=time.clock()-time1)
             else:
@@ -314,10 +314,10 @@ def sqrtS (inputString) -> float:
                 return fl
         else:
             logError("Root negative")
-            return nan
+            return m.nan
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("Square Root Format Error")
-        return nan
+        return m.nan
 
 def cubtS (inputString) -> float:
     time1 = time.clock()
@@ -337,7 +337,7 @@ def cubtS (inputString) -> float:
             return fl
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("Cubt Format Error")
-        return nan
+        return m.nan
 
 def randomNonBracketFuncS() -> float:
     time1 = time.clock()
@@ -370,7 +370,7 @@ def randomIntFuncS(inputString) -> float:
             return fl
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("Random Format Error")
-        return nan
+        return m.nan
 
 def randomFuncS(inputString) -> float:
     time1 = time.clock()
@@ -385,7 +385,7 @@ def randomFuncS(inputString) -> float:
             return fl
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("Random Format Error")
-        return nan
+        return m.nan
 
 def rtNS (inputString) -> float:
     time1 = time.clock()
@@ -404,7 +404,7 @@ def rtNS (inputString) -> float:
                 return fl
         except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
             logError("Your number wasn't in the format for rootin")
-            return nan
+            return m.nan
     else:
         logError("Your number wasn't in the format for rooting.")
 
@@ -417,71 +417,71 @@ def intFormatFuncS(inputString) -> float:
         return fl
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("int Format Error")
-        return nan
+        return m.nan
 
 def atanFuncS(inputString) -> str:
     time1 = time.clock()
     result = re.search(atanRegex, inputString)
     try:
-        fl = atan(float(result.group(2)))
-        fl = degrees(fl) if not UIConstants.gRadians else fl
+        fl = m.atan(float(result.group(2)))
+        fl = m.degrees(fl) if not UIConstants.gRadians else fl
         logL(log="     Working out: atan(" + result.group(2) + ") = " + str(fl), time=time.clock()-time1)
         return str(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("atan Format Error")
-        return str(nan)
+        return str(m.nan)
 
 def acosFuncS(inputString) -> str:
     time1 = time.clock()
     result = re.search(acosRegex, inputString)
     try:
-        fl = acos(float(result.group(2)))
-        fl = degrees(fl) if not UIConstants.gRadians else fl
+        fl = m.acos(float(result.group(2)))
+        fl = m.degrees(fl) if not UIConstants.gRadians else fl
         logL(log="     Working out: acos(" + result.group(2) + ") = " + str(fl), time=time.clock()-time1)
         return str(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("acos Format Error")
-        return str(nan)
+        return str(m.nan)
 
 def asinFuncS(inputString) -> str:
     time1 = time.clock()
     result = re.search(asinRegex, inputString)
     try:
-        fl = asin(float(result.group(2)))
-        fl = degrees(fl) if not UIConstants.gRadians else fl
+        fl = m.asin(float(result.group(2)))
+        fl = m.degrees(fl) if not UIConstants.gRadians else fl
         logL(log="     Working out: asin(" + result.group(2) + ") = " + str(fl), time=time.clock()-time1)
         return str(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("asin Format Error")
-        return str(nan)
+        return str(m.nan)
 
 def tanFuncS(inputString) -> str:
     time1 = time.clock()
     result = re.search(tanRegex, inputString)
     try:
         if UIConstants.gRadians is False:
-            fl = tan(radians(float((result.group(2)))))
+            fl = m.tan(m.radians(float((result.group(2)))))
         else:
-            fl = tan(float(result.group(2)))
+            fl = m.tan(float(result.group(2)))
         logL(log="     Working out: tan(" + result.group(2) + ") = " + str(fl), time=time.clock()-time1)
         return str(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("tan Format Error")
-        return str(nan)
+        return str(m.nan)
 
 def cosFuncS(inputString) -> str:
     time1 = time.clock()
     result = re.search(cosRegex, inputString)
     try:
         if UIConstants.gRadians is False:
-            fl = cos(radians(float(result.group(2))))
+            fl = m.cos(m.radians(float(result.group(2))))
         else:
-            fl = cos(float(result.group(2)))
+            fl = m.cos(float(result.group(2)))
         logL(log="     Working out: cos(" + result.group(2) + ") = " + str(fl), time=time.clock()-time1)
         return str(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("cos Format Error")
-        return str(nan)
+        return str(m.nan)
 
 def sinFuncS(inputString) -> str:
     time1 = time.clock()
@@ -490,92 +490,92 @@ def sinFuncS(inputString) -> str:
     #print(result.groups())
     try:
         if UIConstants.gRadians is False:
-            fl = sin(radians(float(result.group(2))))
+            fl = m.sin(m.radians(float(result.group(2))))
         else:
-            fl = sin(float(result.group(2)))
+            fl = m.sin(float(result.group(2)))
         logL(log="     Working out: sin(" + result.group(2) + ") = " + str(fl), time=time.clock()-time1)
         return str(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("sin Format Error")
-        return str(nan)
+        return str(m.nan)
 
 def acotFuncS(inputString) -> str:
     time1 = time.clock()
     result = re.search(acotRegex, inputString)
     try:
-        fl = 1/atan(float(result.group(2)))
-        fl = degrees(fl) if not UIConstants.gRadians else fl
+        fl = 1/m.atan(float(result.group(2)))
+        fl = m.degrees(fl) if not UIConstants.gRadians else fl
         logL(log="     Working out: acot(" + result.group(2) + ") = " + str(fl), time=time.clock()-time1)
         return str(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("acot Format Error")
-        return str(nan)
+        return str(m.nan)
 
 def asecFuncS(inputString) -> str:
     time1 = time.clock()
     result = re.search(asecRegex, inputString)
     try:
-        fl = 1/acos(float(result.group(2)))
-        fl = degrees(fl) if not UIConstants.gRadians else fl
+        fl = 1/m.acos(float(result.group(2)))
+        fl = m.degrees(fl) if not UIConstants.gRadians else fl
         logL(log="     Working out: asec(" + result.group(2) + ") = " + str(fl), time=time.clock()-time1)
         return str(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("asec Format Error")
-        return str(nan)
+        return str(m.nan)
 
 def acosecFuncS(inputString) -> str:
     time1 = time.clock()
     result = re.search(acosecRegex, inputString)
     try:
-        fl = 1/asin(float(result.group(2)))
-        fl = degrees(fl) if not UIConstants.gRadians else fl
+        fl = 1/m.asin(float(result.group(2)))
+        fl = m.degrees(fl) if not UIConstants.gRadians else fl
         logL(log="     Working out: acosec(" + result.group(2) + ") = " + str(fl), time=time.clock()-time1)
         return str(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("acosec Format Error")
-        return str(nan)
+        return str(m.nan)
 
 def cotFuncS(inputString) -> str:
     time1 = time.clock()
     result = re.search(cotRegex, inputString)
     try:
         if UIConstants.gRadians is False:
-            fl = 1.0/(tan(radians(float(result.group(2)))))
+            fl = 1.0/(m.tan(m.radians(float(result.group(2)))))
         else:
-            fl = 1.0/(tan(float(result.group(2))))
+            fl = 1.0/(m.tan(float(result.group(2))))
         logL(log="     Working out: cot(" + result.group(2) + ") = " + str(fl), time=time.clock()-time1)
         return str(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("cot Format Error")
-        return str(nan)
+        return str(m.nan)
 
 def secFuncS(inputString) -> str:
     time1 = time.clock()
     result = re.search(secRegex, inputString)
     try:
         if UIConstants.gRadians is False:
-            fl = 1/cos(radians(float(result.group(2))))
+            fl = 1/m.cos(m.radians(float(result.group(2))))
         else:
-            fl = 1/cos(float(result.group(2)))
+            fl = 1/m.cos(float(result.group(2)))
         logL(log="     Working out: sec(" + result.group(2) + ") = " + str(fl), time=time.clock()-time1)
         return str(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("sec Format Error")
-        return str(nan)
+        return str(m.nan)
 
 def cosecFuncS(inputString) -> str:
     time1 = time.clock()
     result = re.search(cosecRegex, inputString)
     try:
         if UIConstants.gRadians is False:
-            fl = 1/sin(radians(float(result.group(2))))
+            fl = 1/m.sin(m.radians(float(result.group(2))))
         else:
-            fl = 1/sin(float(result.group(2)))
+            fl = 1/m.sin(float(result.group(2)))
         logL(log="     Working out: cosec(" + result.group(2) + ") = " + str(fl), time=time.clock()-time1)
         return str(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("cosec Format Error")
-        return str(nan)
+        return str(m.nan)
 
 def binFuncS(inputString) -> float:
     time1 = time.clock()
@@ -586,7 +586,7 @@ def binFuncS(inputString) -> float:
         return float(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("Binary Format Error")
-        return nan
+        return m.nan
 
 def hexFuncS(inputString) -> float:
     time1 = time.clock()
@@ -597,7 +597,7 @@ def hexFuncS(inputString) -> float:
         return float(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("Hexadecimal Format Error")
-        return nan
+        return m.nan
 
 def octFuncS(inputString) -> float:
     time1 = time.clock()
@@ -608,7 +608,7 @@ def octFuncS(inputString) -> float:
         return float(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("Octal Format Error")
-        return nan
+        return m.nan
 
 def baseFuncS(inputString) -> float:
     time1 = time.clock()
@@ -619,7 +619,7 @@ def baseFuncS(inputString) -> float:
         return float(fl)
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("Base formatting not right should be base(x, n) with x being a value of base n")
-        return nan
+        return m.nan
 
 def modFuncS(inputString) -> float:
     time1 = time.clock()
@@ -634,4 +634,4 @@ def modFuncS(inputString) -> float:
             return fl
     except (TypeError, ArithmeticError, AssertionError, NameError, ValueError):
         logError("Modulo Error")
-        return nan
+        return m.nan

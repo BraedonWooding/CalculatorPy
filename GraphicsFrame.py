@@ -87,7 +87,6 @@ def chooseLine(graph) -> int:
 #A choice dialog that returns a graph index
 def chooseGraph() -> int:
     # Select a graph
-    global allGraphs
     for x in allGraphs:
         if x[0].canvas is None:
             allGraphs.Remove(x)
@@ -287,37 +286,27 @@ class CalculatorMenu:
 
     #Toggles grid
     def toggleGrid(self, event):
-        if self.edit_menu.IsChecked(wx.ID_FILE6):
-            UIConstants.gGrid = True
-        else:
-            UIConstants.gGrid = False
+        UIConstants.gGrid = self.edit_menu.IsChecked(wx.ID_FILE6)
         self.edit_menu.Check(wx.ID_FILE6, self.edit_menu.IsChecked(wx.ID_FILE6))
         for graph in allGraphs:
             graph[0].draw()
 
     #Toggles high resolution
     def toggleHiRes(self, event):
-        if self.edit_menu.IsChecked(wx.ID_FILE7):
-            UIConstants.gHiRes = True
-        else:
-            UIConstants.gHiRes = False
+        UIConstants.gHiRes = self.edit_menu.IsChecked(wx.ID_FILE7)
         self.edit_menu.Check(wx.ID_FILE7, self.edit_menu.IsChecked(wx.ID_FILE7))
         for graph in allGraphs:
             graph[0].draw()
 
     #Toggles legends for graphs
     def toggleLegend(self, event):
-        if self.edit_menu.IsChecked(wx.ID_FILE8):
-            UIConstants.gLegend = True
-        else:
-            UIConstants.gLegend = False
+        UIConstants.gLegend = self.edit_menu.IsChecked(wx.ID_FILE8)
         self.edit_menu.Check(wx.ID_FILE8, self.edit_menu.IsChecked(wx.ID_FILE8))
         for graph in allGraphs:
             graph[0].draw()
 
     # Toggles recursion
     def toggleFractions(self, event):
-        global _latest
         UIConstants.gFraction = self.edit_menu.IsChecked(wx.ID_FILE9)
         self.edit_menu.Check(wx.ID_FILE9, self.edit_menu.IsChecked(wx.ID_FILE9))
         if "y" not in _latest.lower() and "x" not in _latest.lower():
@@ -434,15 +423,15 @@ class CalculatorMenu:
         res = allGraphs[graphInt][0].canvas._Buffer.SaveFile(fileName, extensions[fType])
         return res
 
+    @classmethod
     #Command Line that changes the graph based of input
-    def commandLine(self, event):
+    def commandLine(cls, event):
         #Select a graph
         chosenGraph = chooseGraph()
         if chosenGraph < len(allGraphs):
             graphOfChoice = allGraphs[chosenGraph]
         else:
             graphOfChoice = None
-        global colours
         #Type command
         textEntryDialog = wx.TextEntryDialog(None, "Type your command in.\nCommands in documentation", "Command Line")
         if textEntryDialog.ShowModal() == wx.ID_OK:
@@ -568,7 +557,6 @@ class CalculatorMenu:
                         graphOfChoice[0].hiddenLegends.append(graphOfChoice[0].legends[line])
                         graphOfChoice[0].legends.remove(graphOfChoice[0].legends[line])
                         graphOfChoice[0].draw()
-
 _main = None
 _latest = ""
 
@@ -589,7 +577,6 @@ class ProgramFrame(wx.Frame):
         self.Center()
 
     def onExit(self, event):
-        global selfV, allGraphs
         for graphFrame in allGraphs:
             graphFrame[0].Close()
         self.Destroy()
@@ -598,7 +585,6 @@ class ProgramFrame(wx.Frame):
 
 #If enter is pressed then it checks for simple clear or voids.  Else do main or process the text equation.
     def setText(self, event):
-        global _main, _latest
         if "clear" in self.textEntry.GetLineText(lineNo=0).lower():
             self.output.Clear()
         elif "void" in self.textEntry.GetLineText(lineNo=0).lower():

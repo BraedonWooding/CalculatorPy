@@ -10,7 +10,6 @@ def setMemory (number):
 
 #Adds answer
 def addAnswer (answer):
-    global  _answers
     _answers.append(answer)
 
 #Clear all
@@ -21,7 +20,6 @@ def clear():
 
 #Returns memory
 def getMemory() -> float:
-    global _memory
     return _memory
 
 #Gets answer of n

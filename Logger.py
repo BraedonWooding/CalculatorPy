@@ -16,13 +16,10 @@ def clear():
 
 #Func to queue an error
 def logError(error):
-
-    global _errors
     _errors.append(error)
 
 #'logs' a log and line and a time
 def logL(log, line=-1, time=0.0):
-    global _logs, _lines, _times
     _logs.append(log)
     _lines.append(line)
     _times.append(time)
