@@ -3,7 +3,6 @@ import math
 gRadians = False
 gTime = True
 gRecursionStopper = True
-gCentre = False
 gGrid = True
 gHiRes = False
 gLegend = True
@@ -85,7 +84,7 @@ def performCalculation(testing, valueX, valueY) -> bool:
                     firstV = valueX
                 if math.isnan(firstV):
                     firstV = valueY
-            if isinstance(secondV, str):
+            if isinstance(secondV, float):
                 if math.isinf(secondV):
                     secondV = valueX
                 if math.isnan(secondV):

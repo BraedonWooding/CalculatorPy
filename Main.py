@@ -17,7 +17,6 @@ import time
 
 def repeatExpressionTillDone (expression, startLine = -1, extraBeforeText="", extraAfterText="", printText=True) -> str:
     inputtedExpression = expression
-    #print(expression)
     line = startLine
     repeats = 0
     try:
@@ -468,7 +467,7 @@ def processExpression(text):
                     newText = re.sub(xEqualsRegex, "", inputtedExpression).replace("y", str(round(i, 4)))
                     val = float(repeatExpressionTillDone(newText, printText=False))
                     #Nan means an error occured which means we most likely encountered an asymptote
-                    if math.isnan(val) is False:
+                    if m.isnan(val) is False:
                         stop = False
                         val = round(val, 4)
                         for expressionTest in typeOfF.expressions:
@@ -498,7 +497,7 @@ def processExpression(text):
                     newText = re.sub(yEqualsRegex, "", inputtedExpression).replace("x", str(round(i, 4)))
                     val = float(repeatExpressionTillDone(newText, printText=False))
                     #Nan means an error occured which means we most likely encountered an asymptote
-                    if math.isnan(val) is False:
+                    if m.isnan(val) is False:
                         stop = False
                         val = round(val, 4)
                         for expressionTest in typeOfF.expressions:
