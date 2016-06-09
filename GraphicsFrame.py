@@ -124,17 +124,8 @@ class GraphicsFrame(wx.Frame):
         self.bgColour = 'WHITE'
         self.fgColour = 'BLACK'
         self.legends = legends
-        if UIConstants.gCentre:
-            #Just 'centres the graph' so height and width are same
-            l_min = min(x[0], y[0])
-            l_max = max(x[1], y[1])
-            self.originalX = (l_min, l_max)
-            self.originalY = (l_min, l_max)
-        else:
-            self.originalX = x
-            self.originalY = y
-        self.x = self.originalX
-        self.y = self.originalY
+        self.x = x
+        self.y = y
         self.width = width
         index = colours.index(start_colour.upper())
         if start_colours is not None:
@@ -188,6 +179,7 @@ class GraphicsFrame(wx.Frame):
         self.Destroy()
         event.Skip()
 
+outlineGraph = True
 #Setups calculator menu from panel
 class CalculatorMenu:
     def __init__(self, panel):
@@ -252,7 +244,7 @@ class CalculatorMenu:
 
     @classmethod
     def openHelp(cls, event):
-        subprocess.Popen("open Help", shell=True)
+        subprocess.Popen("open Help.pdf", shell=True)
 
     #Toggles degrees and radians; is reversed since I called variable gRadians instead of gDegrees
     def toggleDegrees(self, event):
@@ -271,7 +263,9 @@ class CalculatorMenu:
 
     #Toggles grid
     def toggleGrid(self, event):
+        global outlineGraph
         UIConstants.gGrid = self.graphing_menu.IsChecked(wx.ID_FILE6)
+        outlineGraph = UIConstants.gGrid
         self.graphing_menu.Check(wx.ID_FILE6, self.graphing_menu.IsChecked(wx.ID_FILE6))
         for graph in allGraphs:
             graph[0].draw()
@@ -280,6 +274,12 @@ class CalculatorMenu:
     def toggleHiRes(self, event):
         UIConstants.gHiRes = self.graphing_menu.IsChecked(wx.ID_FILE7)
         self.graphing_menu.Check(wx.ID_FILE7, self.graphing_menu.IsChecked(wx.ID_FILE7))
+        if UIConstants.gHiRes:
+            UIConstants.gGrid = False
+            self.graphing_menu.Check(wx.ID_FILE6, False)
+        else:
+            UIConstants.gGrid = outlineGraph
+            self.graphing_menu.Check(wx.ID_FILE6, outlineGraph)
         for graph in allGraphs:
             graph[0].draw()
 
