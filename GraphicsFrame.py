@@ -1,8 +1,10 @@
-import wx.lib.plot as plot
-import wx.adv
-import wx
-import UIConstants
 import subprocess
+
+import wx
+import wx.adv
+import wx.lib.plot as plot
+
+import UIConstants
 
 selfV = None
 #Not sure if used but it could be somewhere.  Shouldn't be used though since doesn't update
@@ -189,7 +191,7 @@ class CalculatorMenu:
         self.edit_menu = wx.Menu()
         self.edit_menu.Append(wx.ID_EDIT, "&Command Line\tCtrl+L")
         self.edit_menu.Append(wx.ID_FILE2, "&Degrees\tCtrl+D", "Degrees/Radians")
-        self.edit_menu.Append(wx.ID_FILE9, "&Decimals\tCtrl+F", "Decimals/Fractions")
+        self.edit_menu.Append(wx.ID_FILE9, "&Decimal\tCtrl+F", "Decimal/Fraction")
         self.edit_menu.Append(wx.ID_FILE3, "&Recursion Stopper\tCtrl+R", "Enable recursion blocker", wx.ITEM_CHECK)
         self.edit_menu.Append(wx.ID_FILE4, "&Time Logger\tCtrl+T", "Enable time logger", wx.ITEM_CHECK)
         self.menu_bar.Append(self.edit_menu, "&Options")
@@ -512,7 +514,7 @@ class CalculatorMenu:
                     graphOfChoice[0].draw()
 
             #Unhides all linse
-            if "unhide all" in value.lower():
+            if "show all" in value.lower():
                 if graphOfChoice[0] is not None:
                     graphOfChoice[0].data.extend(graphOfChoice[0].hiddenLines)
                     graphOfChoice[0].hiddenLines = []
@@ -521,7 +523,8 @@ class CalculatorMenu:
                     graphOfChoice[0].draw()
 
             #Unhides x line
-            elif "unhide" in value.lower():
+            # Is else to prevent double occurences
+            elif "show" in value.lower():
                 if graphOfChoice is not None:
                     line = chooseHidden(graphOfChoice)
                     if line is not None:
