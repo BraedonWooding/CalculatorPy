@@ -20,7 +20,7 @@ class TypeOfF:
         self.expressions.append(expression)
 
 #Returns if the value is a number
-def is_number(s):
+def is_number(s) -> bool:
     try:
         float(s)
         return True

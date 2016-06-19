@@ -1,13 +1,14 @@
-from Functions import *
 import math as m
-from Constants import *
+import time
 from fractions import Fraction
-from UIConstants import  *
-import wx
+
 import GraphicsFrame
 import Logger
 import ValueRememberer
-import time
+from Constants import *
+from Functions import *
+from UIConstants import *
+
 
 # Function that takes in a stringed expression and returns the final string value of that expression
 # Line is just a simple value that states what line the thing is at
@@ -467,7 +468,7 @@ def processExpression(text):
                     newText = re.sub(xEqualsRegex, "", inputtedExpression).replace("y", str(round(i, 4)))
                     val = float(repeatExpressionTillDone(newText, printText=False))
                     #Nan means an error occured which means we most likely encountered an asymptote
-                    if m.isnan(val) is False:
+                    if not m.isnan(val):
                         stop = False
                         val = round(val, 4)
                         for expressionTest in typeOfF.expressions:
@@ -497,7 +498,7 @@ def processExpression(text):
                     newText = re.sub(yEqualsRegex, "", inputtedExpression).replace("x", str(round(i, 4)))
                     val = float(repeatExpressionTillDone(newText, printText=False))
                     #Nan means an error occured which means we most likely encountered an asymptote
-                    if m.isnan(val) is False:
+                    if not m.isnan(val):
                         stop = False
                         val = round(val, 4)
                         for expressionTest in typeOfF.expressions:
@@ -615,5 +616,15 @@ def StartApp():
     _menu = GraphicsFrame.CalculatorMenu(_frame)
     _AppBuilt.MainLoop()
 
-#Only main command in whole thing.  This will start the program everything else is event based and function driven!!
-StartApp()
+
+try:
+    import numpy
+    import wx
+
+    # Only main command in whole thing.  This will start the program everything else is event based and function driven!!
+    StartApp()
+except (ImportError, ImportWarning):
+    import subprocess
+
+    subprocess.Popen("open Install.pdf", shell=True)
+    print("You need to install numpy and wx for the program to work!")
