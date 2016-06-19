@@ -1,11 +1,7 @@
-import math as m
-import time
 from fractions import Fraction
 
-import GraphicsFrame
 import Logger
 import ValueRememberer
-from Constants import *
 from Functions import *
 from UIConstants import *
 
@@ -565,7 +561,7 @@ def processExpression(text):
                 if not hasSymbols(inputtedExpression):
                     break
             #Recursion stopper (Can't be disable)
-            if previous == inputtedExpression:
+            if previous.replace(" ", "") == inputtedExpression.replace(" ", ""):
                 break
             else:
                 previous = inputtedExpression
@@ -621,7 +617,7 @@ try:
     import numpy
     import wx
 
-    # Only main command in whole thing.  This will start the program everything else is event based and function driven!!
+    # This will start the program everything else is event based and function driven!!
     StartApp()
 except (ImportError, ImportWarning):
     import subprocess

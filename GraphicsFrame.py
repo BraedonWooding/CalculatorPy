@@ -7,9 +7,6 @@ import wx.lib.plot as plot
 import UIConstants
 
 selfV = None
-#Not sure if used but it could be somewhere.  Shouldn't be used though since doesn't update
-#Probably left over from archaic
-latestGraphSelf = None
 allGraphs = []
 
 colours = [
@@ -149,7 +146,6 @@ class GraphicsFrame(wx.Frame):
     #Draws the graph
     def draw(self):
         # plot.
-        global latestGraphSelf
         self.canvas = plot.PlotCanvas(self, pos=(0,0), size=(940,720))
         self.canvas.EnableZoom = True
         self.canvas.SetBackgroundColour(self.bgColour)
@@ -173,7 +169,6 @@ class GraphicsFrame(wx.Frame):
         if len(self.data) > 0:
             self.canvas.EnableLegend = UIConstants.gLegend
         self.canvas.EnableGrid = UIConstants.gGrid
-        latestGraphSelf = self
 
     #On exit of graph, remove the graph
     def onExit(self, event):
@@ -591,7 +586,7 @@ class ProgramFrame(wx.Frame):
             graphics.Show()
         else:
             _latest = self.textEntry.GetLineText(lineNo=0)
-            #Getting in-editor error saying _main is not callable.  No actual error just the in-editor not recognising that the global is fine.  Importing a global when its not needed wastes resources so this is faster and has no negative effect.
+            # Getting in-editor warning saying _main is not callable.  No actual error just the in-editor not recognising that the global is fine.  Importing a global when its not needed wastes resources so this is faster and has no negative effect.
             _main(_latest)
         self.textEntry.Clear()
 
